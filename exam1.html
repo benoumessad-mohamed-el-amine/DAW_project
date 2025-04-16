@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exam 1</title>
+  <link rel="stylesheet" href="/css/exam_style.css" />
+  <script defer src="/js/exam_script.js"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="exam-header">
+    <div class="logo">
+      <img src="/assets/logo.png" alt="Logo" />
+    </div>
+    <h1>University of Boumerdes - Exam 1</h1>
+  </header>
+<div class="skelton">
+  <!-- Navigation -->
+  <nav class="exam-nav"> 
+    
+    <ul>
+      <li><a hrefe="#xercise1">Exercise 1</a></li>
+      <li><a href="#exercise2">Exercise 2</a></li>
+      <li><a href="#exercise3">Exercise 3</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="exam-layout">
+    <!-- Main Content -->
+    <main class="exam-content">
+      <section class="exercise" id="exercise1">
+        <h2><strong>Exercise 1: MCQs</strong></h2>
+        <hr/>
+        <article>
+          <p>1. What is 2 + 2?</p>
+          <label><input type="checkbox" name="q1"> 3</label><br/>
+          <label><input type="checkbox" name="q1"> 4</label><br/>
+          <label><input type="checkbox" name="q1"> 5</label>
+        </article>
+        <hr/>
+      </section>
+
+      <section class="exercise" id="exercise2">
+        <h2><strong>Exercise 2: True/False</strong></h2>
+        <hr/>
+        <article>
+          <p>2. The earth is flat.</p>
+          <label><input type="radio" name="q2" value="true"> True</label><br/>
+          <label><input type="radio" name="q2" value="false"> False</label>
+        </article>
+        <hr/>
+      </section>
+
+      <section class="exercise" id="exercise3">
+        <h2><strong>Exercise 3: MCQs</strong></h2>
+        <hr/>
+        <article>
+          <p>3. Which is a programming language?</p>
+          <label><input type="checkbox" name="q3"> Python</label><br/>
+          <label><input type="checkbox" name="q3"> Banana</label>
+        </article>
+        <hr/>
+      </section>
+    </main>
+
+    <!-- Right Aside -->
+    <aside class="aside-right">
+      <div class="scroll-guidelines sticky-box">
+        <h3>Guidelines</h3>
+        <p>✔ Complete all questions.<br/>✔ Do not refresh the page.<br/>✔ Your answers will auto-submit on timeout.</p>
+      </div>
+
+      <div class="timer-box sticky-box">
+        <div class="scroll_time_box">
+          <h3>Time Left:</h3>
+          <span id="timer">01:30:00</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer class="exam-footer">
+    <button id="submit-btn">Submit</button>
+    <div id="score-display">Final Score: -- / --</div>
+  </footer>
+</body>
+</html>
+
+

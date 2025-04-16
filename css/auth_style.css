@@ -1,0 +1,103 @@
+/* Global Styles */
+body.a_page_body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/assets/auth_blue.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  /* Wrapper */ 
+  .page-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  #title_card {
+    text-align: center;
+    margin-bottom: 30px;
+    
+  }
+  
+  #title_card h1 {
+    text-align: center;
+    font-size: 32px;
+    color: white ;
+    font-family: Proxima Nova,Helvetica Neue,Arial,Helvetica,sans-serif;
+  }
+  
+  /* Form Container */
+  .container {
+    background:   #0D1B2A  ;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    
+    
+  }
+  /* Form Group */
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #ffff;
+  }
+  
+  input {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  /* Button */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error Message */
+  .error {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Responsive (optional) */
+  @media (max-width: 500px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    #title_card h1 {
+      font-size: 26px;
+    }
+  }
+  
+  
