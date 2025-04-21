@@ -6,7 +6,9 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main_style.css">
-    
+    <!--this line should be removed after fixing the import-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/script.js" defer></script>
 </head>
 
 <body class="m_body">
@@ -20,7 +22,7 @@
     
     <div class="nav_main">
       <nav>
-        <ul>
+        <ul >
           <li><a href="exam1.html">Exam 1</a></li>
           <li><a href="exam2.html">Exam 2</a></li>
           <li><a href="exam3.html">Exam 3</a></li>
@@ -53,10 +55,11 @@
 
 </div>
 <footer class="a_footer">
-    <ul>
-      <li id="lii"><span>👤</span> John Doe</li>
-      <li id="lii"><span>✉</span> john.doe@email.com</li>
-      <li id="lii"><span>📚</span> Group: A, Section: 1</li>
+    <ul >
+      <li id="name"><span>👤</span> </li>
+      <li id="email"><span>✉</span> </li>
+      <li id="group"><span>📚</span> group : </li>
+      <li id="section"> <span>📚</span> section : </li>
     </ul>
 </footer>
 

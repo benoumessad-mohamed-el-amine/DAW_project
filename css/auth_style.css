@@ -8,7 +8,7 @@ body.a_page_body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('/assets/auth_blue.jpg') no-repeat center center fixed;
+    background: url('./assets/auth_blue.jpg') no-repeat center center fixed;
     background-size: cover;
   }
   
