@@ -1,0 +1,81 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main - Exam Platform</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+<header>
+  <img src="images/inim_logo.png" alt="Logo" class="logo">
+  <h1>UMBB - Online Exams platform</h1>
+</header>
+
+<div id="side">
+  <nav>
+    <a href="exam1.html">WAD Exam</a>
+    <a href="exam2.html">OOP Exam</a>
+    <a href="exam3.html">THL Exam</a>
+  </nav>
+
+  <main>
+    <article>
+      <h2>Web Application Development (WAD)</h2>
+      <p>Instructions and rules for WAD exam.</p>
+      <a href="exam1.html">Start WAD Exam</a>
+    </article>
+
+    <article>
+      <h2>Object Oriented Programming (OOP)</h2>
+      <p>Instructions and rules for OOP exam.</p>
+      <a href="exam2.html">Start OOP Exam</a>
+    </article>
+
+    <article>
+      <h2>Theory Language (THL)</h2>
+      <p>Instructions and rules for LTH exam.</p>
+      <a href="exam3.html">Start LTH Exam</a>
+    </article>
+  </main>
+</div>
+
+<footer>
+  <ul class="student-info">
+    <li><strong>👤 Name:</strong> <span id="studentName"></span></li>
+    <li><strong>✉️ Email:</strong> <span id="studentEmail"></span></li>
+    <li><strong>👥 Group:</strong> <span id="studentGroup"></span></li>
+    <li><strong>🏫 Section:</strong> <span id="studentSection"></span></li>
+
+  </ul>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('studentName').textContent =
+            localStorage.getItem('userName') || 'N/A';
+    document.getElementById('studentEmail').textContent =
+            localStorage.getItem('userEmail') || 'N/A';
+    document.getElementById('studentGroup').textContent =
+            localStorage.getItem('userGroup') || 'N/A';
+    document.getElementById('studentSection').textContent =
+            localStorage.getItem('userSection') || 'N/A';
+
+
+    const candidateId = localStorage.getItem('candidateId');
+    if (candidateId) {
+      fetch(`http://localhost:3000/candidate/${candidateId}`)
+              .then(res => res.json())
+              .then(data => {
+
+                document.getElementById('studentName').textContent = data.name || 'N/A';
+                document.getElementById('studentEmail').textContent = data.email || 'N/A';
+                document.getElementById('studentGroup').textContent = data.group_name || 'N/A';
+                document.getElementById('studentSection').textContent = data.section || 'N/A';
+              })
+              .catch(console.error);
+    }
+  });
+</script>
+</body>
+</html>

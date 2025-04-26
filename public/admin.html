@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/public/css/admin.css">
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+
+<div class="admin-sections">
+  <section id="candidate-management">
+    <h2>Candidate Management</h2>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search candidates...">
+      <button onclick="searchCandidates()">Search</button>
+      <select id="sortSelect" onchange="sortCandidates()">
+        <option value="name-asc">Name (A-Z)</option>
+        <option value="name-desc">Name (Z-A)</option>
+        <option value="email-asc">Email (A-Z)</option>
+        <option value="email-desc">Email (Z-A)</option>
+        <option value="grade-asc">Grade (Low-High)</option>
+        <option value="grade-desc">Grade (High-Low)</option>
+      </select>
+    </div>
+    <table id="grades">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Module</th>
+        <th>Grade</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section id="account-management">
+    <h2>Account Management</h2>
+    <button onclick="showAddAccountForm()">Add New Account</button>
+
+    <div id="addAccountForm" style="display: none;">
+      <h3 id="formTitle">Add New Account</h3>
+      <form id="accountForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <select name="role" required>
+          <option value="admin">Admin</option>
+          <option value="candidate" selected>Candidate</option>
+        </select>
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="group_name" placeholder="Group">
+        <input type="text" name="section" placeholder="Section">
+        <button type="submit">Save</button>
+        <button type="button" onclick="hideAddAccountForm()">Cancel</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Global variables
+  let refreshInterval;
+  let isEditMode = false;
+
+  // Search and sort functions
+  function searchCandidates() {
+    const searchTerm = document.getElementById('searchInput').value;
+    const sortValue = document.getElementById('sortSelect').value;
+    fetchCandidates(searchTerm, sortValue);
+  }
+
+  function sortCandidates() {
+    const sortValue = document.getElementById('sortSelect').value;
+    fetchCandidates(document.getElementById('searchInput').value, sortValue);
+  }
+
+  // Account management functions
+  function showAddAccountForm() {
+    document.getElementById('formTitle').textContent = isEditMode ? 'Edit Account' : 'Add New Account';
+    document.getElementById('addAccountForm').style.display = 'block';
+  }
+
+  function hideAddAccountForm() {
+    document.getElementById('addAccountForm').style.display = 'none';
+    document.getElementById('accountForm').reset();
+    isEditMode = false;
+    document.getElementById('accountForm').removeAttribute('data-id');
+  }
+
+  async function editAccount(id) {
+    try {
+      isEditMode = true;
+      const response = await fetch(`http://localhost:3000/account/${id}`);
+      if (!response.ok) throw new Error('Failed to fetch account');
+
+      const data = await response.json();
+      const form = document.getElementById('accountForm');
+
+      form.dataset.id = id;
+      form.username.value = data.username;
+      form.role.value = data.role;
+      form.name.value = data.name || '';
+      form.email.value = data.email || '';
+      form.group_name.value = data.group_name || '';
+      form.section.value = data.section || '';
+
+      showAddAccountForm();
+    } catch (error) {
+      console.error('Edit error:', error);
+      alert('Failed to load account details');
+    }
+  }
+
+  async function deleteAccount(id) {
+    if (!confirm('Are you sure you want to delete this account?')) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/account/${id}`, {
+        method: 'DELETE'
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        fetchCandidates();
+      } else {
+        throw new Error(data.message || 'Delete failed');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Failed to delete account');
+    }
+  }
+
+  // Handle form submission
+  document.getElementById('accountForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = this;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData);
+      const id = form.dataset.id;
+
+      const response = await fetch(
+              id ? `http://localhost:3000/account/${id}` : 'http://localhost:3000/account',
+              {
+                method: id ? 'PUT' : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              }
+      );
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Operation failed');
+
+      hideAddAccountForm();
+      fetchCandidates();
+      alert(`Account ${id ? 'updated' : 'created'} successfully`);
+    } catch (error) {
+      console.error('Form error:', error);
+      alert(error.message || 'Operation failed');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  // Fetch candidates with search and sort
+  async function fetchCandidates(search = '', sort = 'name-asc') {
+    try {
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
+
+      const timestamp = new Date().getTime();
+      const response = await fetch(
+              `http://localhost:3000/admin/candidates/search?search=${encodeURIComponent(search)}&sort=${sort}&t=${timestamp}`
+      );
+
+      if (!response.ok) throw new Error('Failed to fetch data');
+
+      const data = await response.json();
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No candidates found</td></tr>';
+        return;
+      }
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(row.name) || 'N/A'}</td>
+          <td>${escapeHtml(row.email) || 'N/A'}</td>
+          <td>${escapeHtml(row.module) || 'N/A'}</td>
+          <td>${row.grade !== null && row.grade !== undefined ? row.grade : 'Not Graded'}</td>
+          <td class="actions">
+            <button class="btn-edit" onclick="editAccount('${row.id}')">Edit</button>
+            <button class="btn-delete" onclick="deleteAccount('${row.id}')">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (error) {
+      console.error('Fetch error:', error);
+      document.querySelector('tbody').innerHTML = `
+        <tr>
+          <td colspan="5" class="error">Error loading data. Please try again.</td>
+        </tr>
+      `;
+    }
+  }
+
+  // Helper function to prevent XSS
+  function escapeHtml(unsafe) {
+    if (unsafe === null || unsafe === undefined) return unsafe;
+    return String(unsafe)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+  }
+
+  // Auto-refresh
+  function startPolling() {
+    refreshInterval = setInterval(fetchCandidates, 5000);
+  }
+
+  function stopPolling() {
+    clearInterval(refreshInterval);
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchCandidates();
+    startPolling();
+  });
+
+  window.addEventListener('beforeunload', stopPolling);
+</script>
+</body>
+</html>

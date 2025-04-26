@@ -1,0 +1,272 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6fa;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #165da5;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    margin-left: 250px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo {
+    height: 200px;
+    width: auto;
+}
+#skelton{
+    display:flex;
+}
+.container{
+    display:flex;
+    flex-direction: column-reverse;
+}
+
+/* Side Container */
+#side {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Navigation */
+nav {
+    background-color: #0066cc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    min-width: 180px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #004d99;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+section {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #004080;
+    margin-bottom: 15px;
+}
+
+article p {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+hr {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+}
+
+/* Timer and Aside */
+
+
+
+/* Buttons */
+.buttonsSection {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buttonsSection button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #0066cc;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.buttonsSection button:hover {
+    background-color: #004d99;
+}
+
+/* Footer */
+footer {
+    background: #004080;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6fa;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #165da5;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    margin-left: 250px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+}
+
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #004d99;
+}
+
+/* Main content */
+main {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 30px;
+}
+
+/* Each article box */
+article {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin: 30px 10px;
+    width: 700px;
+}
+
+article:hover {
+    transform: translateY(-5px);
+}
+
+article h2 {
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+article a {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+article a:hover {
+    background-color: #004d99;
+}
+
+/* Footer */
+footer {
+    background: #004080;
+    color: white;
+    padding: 20px;
+    font-size: 14px;
+}
+#rightaside {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    z-index: 1000;
+  }
+  #rightaside aside {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+  }
+  #rightaside marquee {
+    font-size: 14px;
+    color: #c0392b;
+    height: 100px;
+    overflow: hidden;
+  }
+  #timer {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
