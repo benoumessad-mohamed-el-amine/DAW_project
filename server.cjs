@@ -22,9 +22,9 @@ let db;
 (async function initializeDatabase() {
     try {
         db = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
+            host: '127.0.0.1',
+            user: 'API',
+            password: 'password',
             database: 'exam_platform'
         });
         console.log('Connected to MySQL');
